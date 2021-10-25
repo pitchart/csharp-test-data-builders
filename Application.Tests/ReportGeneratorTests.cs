@@ -17,18 +17,10 @@ namespace Application.Tests
             ReportGenerator generator = new ReportGenerator();
             InMemoryRepository inMemoryRepository = new InMemoryRepository();
             MainRepository.Override(inMemoryRepository);
+            var Usa = CountryBuilder.USA().Build();
+            var StanLee = AuthorBuilder.StanLee().From(Usa).Build();
 
-            Invoice invoice = new Invoice()
-            {
-                PurchasedBooks =
-                {
-                    new PurchasedBook
-                    {
-
-                    }
-                }
-            };
-            inMemoryRepository.AddInvoice();
+            inMemoryRepository.AddInvoice(null);
 
             //Act
             var amount = generator.GetTotalAmount();
