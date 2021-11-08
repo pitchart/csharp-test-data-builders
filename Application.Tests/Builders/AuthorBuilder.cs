@@ -1,7 +1,7 @@
 ﻿using Application.Domain.Book;
 using Application.Domain.Country;
 
-namespace Application.Tests
+namespace Application.Tests.Builders
 {
     public class AuthorBuilder
     {

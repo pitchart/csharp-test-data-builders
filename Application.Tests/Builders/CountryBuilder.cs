@@ -1,6 +1,6 @@
 ﻿using Application.Domain.Country;
 
-namespace Application.Tests
+namespace Application.Tests.Builders
 {
     public class CountryBuilder
     {

@@ -53,6 +53,11 @@ namespace Application.Purchase
                                               && Equals(Country, other.Country)
                                               && Equals(PurchasedBooks, other.PurchasedBooks);
 
+        public void AddPurchasedBooks(object books)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool Equals(object obj) => ReferenceEquals(this, obj)
                                                    || obj is Invoice other && Equals(other);
 
