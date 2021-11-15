@@ -15,10 +15,7 @@ namespace Application.Tests.Builders
             _language = language;
         }
 
-        public static CountryBuilder USA()
-        {
-            return new CountryBuilder("USA", Currency.UsDollar, Language.English);
-        }
+        public static CountryBuilder Usa => new CountryBuilder("USA", Currency.UsDollar, Language.English);
 
         public Country Build()
         {

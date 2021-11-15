@@ -15,14 +15,12 @@ namespace Application.Tests.Builders
             _quantity = quantity;
         }
 
-        public PurchasedBookBuilder WithBook(IBook book)
-        {
-            _book = book;
-            return this;
-        }
-        public PurchasedBookBuilder Containing(int quantity)
+        public static PurchasedBookBuilder APurchase => new PurchasedBookBuilder(3, BookBuilder.AnEducationBook.Build());
+
+        public PurchasedBookBuilder Containing(int quantity, IBook book)
         {
             _quantity = quantity;
+            _book = book;
             return this;
         }
 
@@ -30,12 +28,5 @@ namespace Application.Tests.Builders
         {
             return new PurchasedBook(_book, _quantity);
         }
-
-        public static PurchasedBookBuilder APurchase()
-        {
-            return new PurchasedBookBuilder(3, BookBuilder.AEducationBook().Build());
-        }
-
-
     }
 }

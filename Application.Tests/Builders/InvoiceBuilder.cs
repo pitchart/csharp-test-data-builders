@@ -16,10 +16,8 @@ namespace Application.Tests.Builders
             _books = purchasedBooks;
         }
 
-        internal static InvoiceBuilder AEmptyInvoice()
-        {
-            return new InvoiceBuilder("David", CountryBuilder.USA().Build(), new List<PurchasedBook>());
-        }
+        internal static InvoiceBuilder AnEmptyInvoice =>
+            new InvoiceBuilder("David", CountryBuilder.Usa.Build(), new List<PurchasedBook>());
 
         internal Invoice Build()
         {

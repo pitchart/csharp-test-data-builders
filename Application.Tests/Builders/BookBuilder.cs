@@ -24,15 +24,12 @@ namespace Application.Tests.Builders
             _type = type;
         }
 
-        public static BookBuilder ANovel()
-        {
-            return new BookBuilder("Novel", 10, AuthorBuilder.StanLee().Build(), Language.English, typeof(Novel));
-        }
+        public static BookBuilder ANovel =>
+            new BookBuilder("Novel", 10, AuthorBuilder.StanLee.Build(), Language.English, typeof(Novel));
 
-        public static BookBuilder AEducationBook()
-        {
-            return new BookBuilder("EducationalBook", 10, AuthorBuilder.StanLee().Build(), Language.English, typeof(EducationalBook));
-        }
+        public static BookBuilder AnEducationBook =>
+            new BookBuilder("EducationalBook", 10, AuthorBuilder.StanLee.Build(), Language.English,
+                typeof(EducationalBook));
 
         public IBook Build()
         {

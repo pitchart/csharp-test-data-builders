@@ -14,17 +14,14 @@ namespace Application.Tests.Builders
             _country = country;
         }
 
-        public static AuthorBuilder StanLee()
-        {
-            return new AuthorBuilder("Stan Lee", CountryBuilder.USA().Build());
-        }
+        public static AuthorBuilder StanLee => new AuthorBuilder("Stan Lee", CountryBuilder.Usa.Build());
 
         public AuthorBuilder From(Country country)
         {
             _country = country;
             return this;
         }
-        
+
         public Author Build()
         {
             return new Author(_name, _country);
