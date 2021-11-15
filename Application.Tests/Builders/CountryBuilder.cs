@@ -16,6 +16,7 @@ namespace Application.Tests.Builders
         }
 
         public static CountryBuilder Usa => new CountryBuilder("USA", Currency.UsDollar, Language.English);
+        public static CountryBuilder France => new CountryBuilder("France", Currency.Euro, Language.French);
 
         public Country Build()
         {

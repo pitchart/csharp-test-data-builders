@@ -30,7 +30,33 @@ namespace Application.Tests
             inMemoryRepository.AddInvoice(invoice);
 
             //Assert
-            Assert.Equal(10, generator.GetTotalAmount());
+            Assert.Equal(10 * 1.15, generator.GetTotalAmount());
+            Assert.Equal(1, generator.GetNumberOfIssuedInvoices());
+            Assert.Equal(1, generator.GetTotalSoldBooks());
+
+            MainRepository.Reset();
+        }
+        
+        [Fact]
+        public void ShouldComputeTotalAmount_WithoutDiscount_WithTaxExchange()
+        {
+            //Arrange
+            InMemoryRepository inMemoryRepository = new InMemoryRepository();
+            MainRepository.Override(inMemoryRepository);
+            ReportGenerator generator = new ReportGenerator();
+
+            var France = CountryBuilder.France.Build();
+
+            EducationalBook book = (EducationalBook)BookBuilder.AnEducationBook.Build();
+
+            PurchasedBook purchasedBook = PurchasedBookBuilder.APurchase.Containing(1, book).Build();
+
+            Invoice invoice = InvoiceBuilder.AnEmptyInvoice.WithPurchaseBook(purchasedBook).From(France).Build();
+
+            inMemoryRepository.AddInvoice(invoice);
+
+            //Assert
+            Assert.Equal(10 * 1.14 * 1.25, generator.GetTotalAmount());
             Assert.Equal(1, generator.GetNumberOfIssuedInvoices());
             Assert.Equal(1, generator.GetTotalSoldBooks());
 

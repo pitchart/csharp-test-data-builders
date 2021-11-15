@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Application.Finance;
 using Application.Purchase;
 using Application.Storage;
 
@@ -12,7 +13,7 @@ namespace Application.Report
         public double GetTotalAmount()
         {
             var invoices = _repository.GetInvoiceMap().Values;
-            var totalAmount = invoices.Sum(invoice => invoice.ComputeTotalAmount());
+            var totalAmount = invoices.Sum(invoice => CurrencyConverter.ToUsd(invoice.ComputeTotalAmount(), invoice.Country.Currency));
             return totalAmount;
         }
 
