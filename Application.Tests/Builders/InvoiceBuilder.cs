@@ -9,7 +9,7 @@ namespace Application.Tests.Builders
         private Domain.Country.Country _country;
         private List<PurchasedBook> _books;
 
-        public InvoiceBuilder(string clientName, Domain.Country.Country country, List<PurchasedBook> purchasedBooks)
+        private InvoiceBuilder(string clientName, Domain.Country.Country country, List<PurchasedBook> purchasedBooks)
         {
             _clientName = clientName;
             _country = country;

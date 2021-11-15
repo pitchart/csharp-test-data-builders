@@ -9,7 +9,7 @@ namespace Application.Tests.Builders
         private IBook _book;
         private int _quantity;
 
-        public PurchasedBookBuilder(int quantity, IBook book)
+        private PurchasedBookBuilder(int quantity, IBook book)
         {
             _book = book;
             _quantity = quantity;
