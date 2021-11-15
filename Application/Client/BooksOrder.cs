@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Application.Domain.Book;
 using Application.Purchase;
+using Application.Storage;
 
 namespace Application.Client
 {
@@ -8,11 +9,13 @@ namespace Application.Client
     {
         private readonly Dictionary<IBook, int> _booksInBasket;
         private readonly Client _client;
+        private IRepository _repository;
 
-        public BooksOrder(Client client)
+        public BooksOrder(Client client, IRepository repository)
         {
             _client = client;
             _booksInBasket = new Dictionary<IBook, int>();
+            _repository = repository;
         }
 
         public void AddBook(IBook book, int quantity)
@@ -28,7 +31,7 @@ namespace Application.Client
             foreach (var (book, quantity) in _booksInBasket)
                 invoice.AddPurchasedBook(new PurchasedBook(book, quantity));
 
-            MainRepository.ConfiguredRepository.AddInvoice(invoice);
+            _repository.AddInvoice(invoice);
             return invoice;
         }
 

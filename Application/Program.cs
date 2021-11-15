@@ -1,5 +1,6 @@
 using System;
 using Application.Report;
+using Application.Storage;
 
 namespace Application
 {
@@ -7,7 +8,7 @@ namespace Application
     {
         public static void Main(string[] args)
         {
-            var reportGenerator = new ReportGenerator();
+            var reportGenerator = new ReportGenerator(new JsonRepository());
 
             Console.WriteLine("****************************************************");
             Console.WriteLine("*****************Application Report*****************");
