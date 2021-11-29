@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Application.Domain.Book;
 using Application.Domain.Country;
+using Diverse;
 
 namespace Application.Tests.Builders
 {
@@ -14,6 +15,7 @@ namespace Application.Tests.Builders
         private Type _type;
         private List<Genre> _genres = new List<Genre>();
         private Category _category;
+        private readonly IFuzz _fuzzer;
 
         private BookBuilder(string name, int price, Author author, Language language, Type type)
         {
@@ -24,11 +26,25 @@ namespace Application.Tests.Builders
             _type = type;
         }
 
+        private BookBuilder(IFuzz fuzz, Type type)
+        {
+            _name = fuzz.GenerateSentence(10);
+            _price = fuzz.GeneratePositiveInteger(200);
+            _author = AuthorBuilder.StanLee.Build();
+            _language = fuzz.GenerateEnum<Language>();
+            _type = type;
+            _fuzzer = fuzz;
+        }
+
         public static BookBuilder ANovel =>
             new BookBuilder("Novel", 10, AuthorBuilder.StanLee.Build(), Language.English, typeof(Novel));
 
-        public static BookBuilder AnEducationBook =>
+        public static BookBuilder AnEducationBook() =>
             new BookBuilder("EducationalBook", 10, AuthorBuilder.StanLee.Build(), Language.English,
+                typeof(EducationalBook));
+
+        public static BookBuilder AnEducationBook(IFuzz fuzz) =>
+            new BookBuilder(fuzz,
                 typeof(EducationalBook));
 
         public IBook Build()
@@ -39,6 +55,12 @@ namespace Application.Tests.Builders
             }
 
             return new EducationalBook(_name, _price, _author, _language, _category);
+        }
+
+        public BookBuilder Coasting(int price)
+        {
+            _price = price;
+            return this;
         }
     }
 }

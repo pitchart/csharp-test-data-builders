@@ -6,12 +6,22 @@ using Application.Report;
 using Application.Storage;
 using Application.Tests.Builders;
 using Application.Tests.Storage;
+using Diverse;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Application.Tests
 {
     public class ReportGeneratorTests
     {
+        private Fuzzer _fuzzer;
+
+        public ReportGeneratorTests(ITestOutputHelper outputHelper)
+        {
+            Fuzzer.Log = outputHelper.WriteLine;
+            _fuzzer = new Fuzzer();
+        }
+        
         [Fact]
         public void ShouldComputeTotalAmount_WithoutDiscount_WithoutTaxExchange()
         {
@@ -21,7 +31,7 @@ namespace Application.Tests
 
             var Usa = CountryBuilder.Usa.Build();
 
-            EducationalBook book = (EducationalBook)BookBuilder.AnEducationBook.Build();
+            EducationalBook book = (EducationalBook)_fuzzer.AnEducationBook().Coasting(10).Build();
 
             PurchasedBook purchasedBook = PurchasedBookBuilder.APurchase.Containing(1, book).Build();
 
@@ -45,7 +55,7 @@ namespace Application.Tests
             
             var France = CountryBuilder.France.Build();
 
-            EducationalBook book = (EducationalBook)BookBuilder.AnEducationBook.Build();
+            EducationalBook book = (EducationalBook)BookBuilder.AnEducationBook().Build();
 
             PurchasedBook purchasedBook = PurchasedBookBuilder.APurchase.Containing(1, book).Build();
 

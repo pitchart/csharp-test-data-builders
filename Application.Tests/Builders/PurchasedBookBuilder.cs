@@ -15,7 +15,7 @@ namespace Application.Tests.Builders
             _quantity = quantity;
         }
 
-        public static PurchasedBookBuilder APurchase => new PurchasedBookBuilder(3, BookBuilder.AnEducationBook.Build());
+        public static PurchasedBookBuilder APurchase => new PurchasedBookBuilder(3, BookBuilder.AnEducationBook().Build());
 
         public PurchasedBookBuilder Containing(int quantity, IBook book)
         {
